@@ -1,0 +1,8 @@
+{
+  "imports": {
+    "@material-ui/core/Icon": "./@material-ui/core/Icon.js",
+    "@stitches/react": "./@stitches/react.js",
+    "react": "./react.js",
+    "react-dom": "./react-dom.js"
+  }
+}
