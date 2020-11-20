@@ -16,29 +16,30 @@ const MultilineInput = props => (
 
 const InputGroup = props => {
 
+  const { label, id, type, helperText, startIcon, endIcon, disabled, fullWidth, multiline, ...others } = props;
+
   return (
     <StyledInputGroup
-      {...props}
-      type={props.disabled ? 'disabled' : props.type ? props.type : null}
-      fullWidth={props.fullWidth ? 'fullWidth' : null}
+      type={disabled ? 'disabled' : type ? type : null}
+      fullWidth={fullWidth ? 'fullWidth' : null}
     >
-      <label htmlFor={props.id}>{props.label}</label>
+      <label htmlFor={id}>{label}</label>
 
       <InputWrapper>
         {
-          props.startIcon ?
-            <Icon style={{ marginRight: '0.5rem' }} fontSize="medium">{props.startIcon}</Icon> :
+          startIcon ?
+            <Icon style={{ marginRight: '0.5rem' }} fontSize="default">{startIcon}</Icon> :
             null
         }
-        {props.multiline ? <MultilineInput {...props} /> : <NormalInput {...props} />}
+        {multiline ? <MultilineInput {...others} /> : <NormalInput {...others} />}
         {
-          props.endIcon ?
-            <Icon style={{ marginLeft: '0.5rem' }} fontSize="medium">{props.endIcon}</Icon> :
+          endIcon ?
+            <Icon style={{ marginLeft: '0.5rem' }} fontSize="default">{endIcon}</Icon> :
             null
         }
       </InputWrapper>
 
-      {props.helperText ? <span className="helperText">{props.helperText}</span> : null}
+      {helperText ? <span className="helperText">{helperText}</span> : null}
     </StyledInputGroup>
   )
 }
