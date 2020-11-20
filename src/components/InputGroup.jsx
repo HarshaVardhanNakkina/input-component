@@ -16,7 +16,7 @@ const MultilineInput = props => (
 
 const InputGroup = props => {
 
-  const { label, id, type, helperText, startIcon, endIcon, disabled, fullWidth, multiline, ...others } = props;
+  const { label, id, type, helperText, startIcon, endIcon, disabled, fullWidth, multiline, value: defaultValue, ...others } = props;
 
   return (
     <StyledInputGroup
@@ -31,7 +31,7 @@ const InputGroup = props => {
             <Icon style={{ marginRight: '0.5rem' }} fontSize="default">{startIcon}</Icon> :
             null
         }
-        {multiline ? <MultilineInput {...others} /> : <NormalInput {...others} />}
+        {multiline ? <MultilineInput {...others} defaultValue={defaultValue ? defaultValue : ''} /> : <NormalInput {...others} defaultValue={defaultValue ? defaultValue : ''} />}
         {
           endIcon ?
             <Icon style={{ marginLeft: '0.5rem' }} fontSize="default">{endIcon}</Icon> :
