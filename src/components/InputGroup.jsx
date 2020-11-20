@@ -8,33 +8,43 @@ import { StyledTextarea } from '../styles/StyledTextarea'
 import { InputWrapper } from '../styles/InputWrapper'
 
 const NormalInput = props => (
-  <StyledInput {...props} disabled={props.disabled ? true : false} />)
+  <StyledInput {...props} />)
 
-const MultilineInput = props => (
-  <StyledTextarea rows={props.rows ? props.rows : 4} cols={props.cols ? props.cols : 30}></StyledTextarea>
+const MultilineInput = ({ rows = 4, cols = 30, ...others }) => (
+  <StyledTextarea rows={rows} cols={cols} {...others}></StyledTextarea>
+
 )
+
+const getDefaultValue = defaultValue => defaultValue ? defaultValue : ''
 
 const InputGroup = props => {
 
-  const { label, id, type, helperText, startIcon, endIcon, disabled, fullWidth, multiline, value: defaultValue, ...others } = props;
+  const { label, id, type, size = null, helperText, startIcon, endIcon, fullWidth, multiline, value: defaultValue = '', ...others } = props;
 
   return (
     <StyledInputGroup
-      type={disabled ? 'disabled' : type ? type : null}
+      type={props.disabled ? 'disabled' : type ? type : null}
       fullWidth={fullWidth ? 'fullWidth' : null}
+      size={size}
     >
       <label htmlFor={id}>{label}</label>
 
       <InputWrapper>
         {
           startIcon ?
-            <Icon style={{ marginRight: '0.5rem' }} fontSize="default">{startIcon}</Icon> :
+            <Icon style={{ marginRight: '0.5rem' }}>{startIcon}</Icon> :
             null
         }
-        {multiline ? <MultilineInput {...others} defaultValue={defaultValue ? defaultValue : ''} /> : <NormalInput {...others} defaultValue={defaultValue ? defaultValue : ''} />}
+
+        {
+          multiline ?
+            <MultilineInput {...others} defaultValue={defaultValue} /> :
+            <NormalInput defaultValue={defaultValue}  {...others} />
+        }
+
         {
           endIcon ?
-            <Icon style={{ marginLeft: '0.5rem' }} fontSize="default">{endIcon}</Icon> :
+            <Icon style={{ marginLeft: '0.5rem' }}>{endIcon}</Icon> :
             null
         }
       </InputWrapper>
